@@ -1,0 +1,1 @@
+python manage.py makemigrations student_management_app academic admin_user administrator announcement attendance cafeteria courses customusers enquiry events exam extrausers formapi inventory lms logs notifications parents residential_management_system role_permission school_settings spis student teacher ticket transports user_profile visitor

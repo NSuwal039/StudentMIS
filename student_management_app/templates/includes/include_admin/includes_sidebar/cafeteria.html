@@ -1,0 +1,58 @@
+
+      {% if perms.cafeteria.view_ingredients or perms.cafeteria.view_fooditem or perms.cafeteria.view_stall or perms.cafeteria.view_cafeteria_staff %}
+      <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas  fa-university mr-1"></i>
+            <p>
+              Cafeteria
+              <i class="fas fa-angle-left right"></i>
+        
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            {% if perms.cafeteria.view_ingredients %}
+            <li class="nav-item ml-3">
+              <a href="{% url 'cafeteria:ingredients_list' %}" class="nav-link">
+                <i class="fas  fa-sitemap"></i>
+                <p>
+                 Ingredients
+                </p>
+              </a>
+            </li>
+            {% endif %}
+            {% if perms.cafeteria.view_fooditem %}
+            <li class="nav-item ml-3">
+              <a href="{% url 'cafeteria:fooditems_list' %}" class="nav-link">
+                <i class="fas  fa-sitemap"></i>
+                <p>
+                 Food Items
+                </p>
+              </a>
+            </li>
+            {% endif %}
+      
+            {% if perms.cafeteria.view_stall %}
+            <li class="nav-item ml-3">
+              <a href="{% url 'cafeteria:stalls_list' %}" class="nav-link">
+                <i class="fas  fa-sitemap"></i>
+                <p>
+                 Stalls
+                </p>
+              </a>
+            </li>
+            {% endif %}
+      
+      
+            {% if perms.cafeteria.view_cafeteria_staff %}
+            <li class="nav-item ml-3">
+              <a href="{% url 'cafeteria:staff_assignment' %}" class="nav-link">
+                <i class="fas  fa-sitemap"></i>
+                <p>
+                  Staff Assignment
+                </p>
+              </a>
+            </li>
+            {% endif %}
+      
+          </ul>
+        {% endif %}

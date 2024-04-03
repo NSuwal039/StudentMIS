@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="invoice p-3 mb-3" id="application_form" style="margin: 15px;">
+        <!-- title row -->
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center">
+                    <img src="/static/image/mid-western-logo.png" style="width:191px;height:65px;" class="img-rectangle ">
+                </div>
+                <h5 class="text-center">
+                    Midwestern University
+                </h5>
+                
+                <h6 class="text-center">
+                    Birendranagar, Surkhet
+                </h6>
+                <h4 class="text-center">
+                    Admission Form
+                </h4>
+            </div>
+          <!-- /.col -->
+        </div>
+        <div>
+            Hello, {{enquiry.name}}.<br>
+            Here is the link for the admission form. <br>
+            <a href = "http://127.0.0.1:8000/enquiry/application_form/{{enquiry.pk}}&{{enquiry.email}}"> Admission Form</a>
+
+        </div>
+        
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<div class="card" >
+    <div class="card-header" style="background-color: #094089;color:white;" >
+        <span>Current Menu ( {{ stall.stall_id }})</span>
+    </div>
+
+    <table class='table table-hover table-sm' id="foods">
+            <thead class='thead'>
+                <tr>
+                    <th>S.N</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in existing_item %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td class="food_name" >{{item.item.name}}</td>
+                    <td class="price">{{item.price}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+    </table>
+
+    <div>
+        <form id="menuitems" method="post">
+
+            {% csrf_token %}
+            <input type="text" name="count" value="0" id="food_count" readonly hidden>
+            
+            <div id="menuitems_body"></div>
+
+            <input type="submit" id="printadmitcard_form_submit" hidden>
+        </form>
+    </div>
+<!-- /.card-body -->
+</div>

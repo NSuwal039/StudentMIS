@@ -1,0 +1,13 @@
+
+{% for item in ingredients %}
+<tr>
+  <td></td>
+  <td>{{ item.name }}</td>
+  <td>{{ item.amount }}</td>
+  <td>{{ item.restock_at }}</td>
+ 
+  <td>
+  <a href="" class="btn btn-xs btn-success">Edit</a>
+</td>
+</tr>
+{% endfor %}

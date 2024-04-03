@@ -1,0 +1,18 @@
+{% load crispy_forms_tags %}
+
+<form method="POST">
+  <div class="input-group">
+    {% csrf_token %} {{ form|crispy }}
+
+    <div class="input-group-btn ml-1 mt-1 mb-1">
+      <button
+        type="submit"
+        class="btn btn-sm"
+        id="take_attendance"
+        style="background-color: #094089; color: white"
+      >
+        <strong>Take Student Attendance</strong>
+      </button>
+    </div>
+  </div>
+</form>

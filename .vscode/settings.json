@@ -1,0 +1,17 @@
+{
+    "python.pythonPath": "/home/anaconda3/envs/gci/bin/python",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "prabhu-intranet",
+            "database": "/home/prabhu-intranet-system/prabhu_intranet_git/prabhu_intranet/db.sqlite3"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "mwu-mis",
+            "database": "${workspaceFolder:midwestern_mis}/db.sqlite3"
+        }
+    ]
+}

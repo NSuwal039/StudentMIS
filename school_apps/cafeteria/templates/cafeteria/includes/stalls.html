@@ -1,0 +1,15 @@
+
+{% for item in stalls %}
+<tr>
+  <td>{{forloop.counter}}</td>
+  <td>{{ item.stall_id }}</td>
+
+  <td>
+    <a href = "{% url 'cafeteria:manage_menu' item.pk %}" class="btn btn-primary btn-sm">Manage Menu</a>
+    <a href = "{% url 'cafeteria:stall_members' item.pk %}" class="btn btn-primary btn-sm">Members</a>
+  </td>
+  
+ 
+</td>
+</tr>
+{% endfor %}

@@ -1,0 +1,136 @@
+{% extends 'admin_templates/base_admin.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Room Edit
+{% endblock title %}
+
+{% block head_css %}
+{% endblock %}
+  
+{% block main_content %}
+
+
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+
+
+<!--populate message after ajax submit is successful-->
+<div class="row">
+  <div class="col-lg-12" >
+        <div class="alert alert-default-success" id="upt_success" style="display:none">
+        </div>
+         <div class="alert alert-default-danger" id="upt_error" style="display:none">
+
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+        </div>
+  </div>
+</div>
+
+<nav>
+    <div class="row">
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-header p-2 ">
+            <ul class="nav nav-tabs nav-custom p-0" id = "nav-tabs" role = "tablist">
+              <li class="nav-item"><a class="nav-item nav-link active" id="nav-general-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-genera" aria-selected="true">General</a></li>
+              <li class="nav-item"><a class="nav-item nav-link" id="nav-pictures-tab" data-toggle="tab" href="#nav-pictures" role="tab" aria-controls="nav-picture" aria-selected="false">Pictures</a></li>
+            </ul>
+          </div><!-- /.card-header -->
+          <div class="card-body">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
+                    <form role="form" action="{% url 'room-edit' room.id%}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{room_form|crispy}}
+                        <label for="files">Add Pictures for the room :</label>
+                        <input type="file" id="files" name="files" multiple><br><br>
+                        <button type="submit" class="btn btn-sm btn-success">Save</button>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="nav-pictures" role="tabpanel" aria-labelledby="nav-pictures-tab">
+                    <div class = 'pictures-div'>
+                        {% for p in room_pictures %}
+                        <div class = 'image-container'>
+                            <img src = "{{p.photo.url}}" class = 'picture'>
+                            <a class = 'del-btn' href = "{% url 'room-picture-delete' p.id room.id%}">Delete</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- /.tab-content -->
+          </div><!-- /.card-body -->
+        </div>
+        <!-- /.nav-tabs-custom -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+
+
+<style>
+  .nav-custom > li > a:hover{
+    color:black;
+  }
+  .nav-custom > li > a{
+    
+    font-weight: 600;
+    color:white;
+    padding: 8px 10px 8px 10px;
+    background-color:#094089;
+  }
+
+  .pictures-div{
+      border: 1px solid rgb(212, 212, 212);
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .image-container{
+      position: relative;
+  }
+
+  .image-container:hover>.del-btn{
+      opacity: 1;
+  }
+
+  .picture{
+      width: 280px;
+      height: 250px;
+  }
+
+  .del-btn{
+      top:5px;
+      right: 5px;
+      position: absolute;
+      color: white;
+      background-color: red;
+      border: 0px;
+      border-radius: 3px;
+      opacity: 0.5;
+      padding:3px;
+  }
+
+  .del-btn:hover{
+      color:white
+  }
+</style>
+    
+{% endblock main_content %}

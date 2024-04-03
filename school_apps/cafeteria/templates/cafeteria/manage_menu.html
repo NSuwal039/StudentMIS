@@ -1,0 +1,72 @@
+{% extends 'admin_templates/base_admin.html' %}
+
+{% load crispy_forms_tags %}
+{% load static  %}
+
+{% block title %} Manage Menu {% endblock %}
+{% block main_content %}
+
+<section class="content">
+  <div class="container-fluid">
+
+  {% include "includes/messages.html" %}
+
+    <div class="row">
+        <div class="col-md-6">
+            {% include  "cafeteria/includes/edit_menu.html" %}
+            <!-- /.card -->
+        </div>
+        <div class = "col-md-6">
+            {% include "cafeteria/includes/current_menu.html" %}
+        </div>
+    </div>
+  </div>
+
+  
+</section>
+<!-- /.content -->
+
+{% endblock main_content %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function(){
+            $("tr").click(function(){
+                var $cb = $(this).find(':checkbox');
+                $cb.prop('checked', !$cb.is(':checked'));
+            })
+
+            $("#Confirm").click(function(){
+                var count=0;
+                var tr_count=0;
+                count = $("#foods tbody tr td :checkbox:checked").length;
+                console.log("count "+count)
+
+                $("#menuitems_body").html("");
+                $("#foods tbody tr td :checkbox:checked").each(function(){
+                    tr_count+=1;
+                    console.log(tr_count)
+                    var app_id = $(this).data("value");
+                    var price = $(this).parent().parent().find(".food_price").val();
+                    var to_add = "<input type=\"text\" name="+ tr_count +" value=\""+app_id +"\"  readonly hidden>";
+                    var to_add1 = "<input type=\"text\" name="+ tr_count +"_price"+  " value=\""+price +"\"  readonly hidden>";
+                    $("#menuitems_body").append(to_add);
+                    $("#menuitems_body").append(to_add1);
+
+                    /**if(count>0){
+                        //console.log("form")
+                        $("#food_count").val(tr_count);
+                        $("#printadmitcard_form_submit").click();
+                    }**/
+                    
+                })
+                if(count>0){
+                    //console.log("form")
+                    $("#food_count").val(tr_count);
+                    $("#printadmitcard_form_submit").click();
+                }
+            })
+        })
+    </script>
+
+{% endblock %}

@@ -1,0 +1,155 @@
+{% extends 'student_base.html'%}
+
+{% block title %}
+{{title}}
+{% endblock title %}
+    
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+  
+    {% include "includes/messages.html" %}
+  
+      <div class="row">
+          <div class="col-12">
+              <div class="card" >
+                  <div class="card-header" style="background-color: #094089;color:white;" >
+                      <span>Sales</span>
+                  </div>
+
+
+                <div class="card-body" >  
+
+                    <div class="row">
+                        <div class="col-1">
+                            <label for="student">Student ID: </label>
+                        </div>
+                        <div class="col-2">
+                            <input type="text" name="student" id="student">
+                        </div>
+                            
+                        <div class="col-1">
+                            <label for="menu_item">Item: </label>
+                        </div>
+                        <div class="col-2">
+                            <select name="menu_item" id="menu_item">
+                                {% for item in menu_items %}
+                                    <option value="{{item.pk}}" data-id="{{item.pk}}"data-name="{{item.item.name}}" data-price = "{{item.price}}">{{item.item.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-1">
+                            <label for="student">Amount: </label>
+                        </div>
+                        <div class="col-2">
+                            <input type="number" name="amount" id="amount">
+                        </div>
+
+                        <div>
+                            <button id="add_item" name="add_item" class="btn btn-primary btn-sm">Add</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <br>
+                        <table class="table table-hover">
+                            <thead class="thead" style="background-color: #094089;color:white;">
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Food Item</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="sales">
+
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <button class="btn btn-primary btn-sm" id="confirm">Confirm Order</button>
+                            </div>
+                        </div>
+
+                        <form id="menuitems" method="post">
+
+                            {% csrf_token %}
+                            <!-- <input type="text" name="count" value="0" id="food_count" readonly hidden>
+                            <input type="text" name="student" value="" id="student_form_input" readonly hidden> -->
+                            <input type="text" name="stall" value="{{stall.pk}}" id="stall" readonly hidden>
+                            
+                            <div id="menuitems_body"></div>
+                
+                            <input type="submit" id="printadmitcard_form_submit" hidden>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </section>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+       
+
+        $(document).ready(function(){
+            $("#add_item").click(function(){
+                var student = $("#student").val();
+                var food_item = $("#menu_item option:selected").data('name');
+                var food_id = $("#menu_item option:selected").data('id');
+                var price = $("#menu_item option:selected").data('price');
+                var amount = $("#amount").val();
+
+                var to_add = "<tr class=\"order_item\"><td class=\"student\">"+ student+"</td class=\"food_name\"> <td>"+ food_item+"</td><td class=\"amount\">"+amount+"</td><td>"+price*amount+"</td><td hidden class=\"food_id\">"+food_id+"</td></tr>";
+                $("#sales").append(to_add);
+
+                console.log(student);
+                console.log(food_item);
+                console.log(amount);
+                
+
+                $("#menu_body").append($("<hr>"));
+            })
+
+            $("#confirm").click(function(){
+                var tr_count=0;
+                var student =$("#student").val();
+                $("#menuitems_body").html("");
+                //$("#student_form_input").val("asd");
+                
+                $(".order_item").each(function(){
+                    tr_count+=1;
+                    var student = $("#student").val();
+                    var food_id = $(this).find(".food_id").text(); 
+                    var amount = $(this).find(".amount").text();
+                    
+                    console.log("stident "+student +" tr count "+ tr_count)
+                    var to_add = "<input type=\"text\" name="+ tr_count +" value=\""+food_id +"\"  readonly hidden>";
+                    var to_add1 = "<input type=\"text\" name="+ tr_count +"_amount"+  " value=\""+amount +"\"  readonly hidden>";
+                    
+                    $("#menuitems_body").append(to_add);
+                    $("#menuitems_body").append(to_add1);
+                    
+
+
+                })
+
+                var count_line = "<input type=\"text\" name=\"count\" value=\""+ tr_count +"\" id=\"food_count\" readonly hidden>"
+                var student_count="<input type=\"text\" name=\"student\" value=\""+ student+"\" id=\"student_form_input\" readonly hidden>"
+                $("#menuitems_body").append(count_line);
+                $("#menuitems_body").append(student_count);
+                //$("#food_count").val(3); 
+
+                if(tr_count>0){
+                    $("#printadmitcard_form_submit").click();
+                }
+            })
+          });
+    </script>
+{% endblock%}

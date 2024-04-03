@@ -1,0 +1,71 @@
+{% extends 'admin_templates/base_admin.html' %}
+
+{% load crispy_forms_tags %}
+{% load static  %}
+
+{% block title %} Manage Menu {% endblock %}
+{% block main_content %}
+
+<section class="content">
+  <div class="container-fluid">
+
+  {% include "includes/messages.html" %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card" >
+                <div class="card-header" style="background-color: #094089;color:white;" >
+                    <span>Manage Menu ( {{ stall.stall_id }})</span>
+                </div>
+
+                <div class="card-body table-responsive">
+                    <form>
+                        <div class = "row" id="menu_body">
+                            <div class = "col-1">Item:</div>
+                            <div class = "col-2">
+                                <select name="food1" id="food_id">
+                                    {% for item in foods %}
+                                        <option value="{{ item.pk }}">{{item.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class = "col-1">Price:</div>
+                            <div class = "col-2">
+                                <input type="number" name="price1" id="price">
+                            </div>
+                            <div><button class="btn btn-sm btn-info add-new">Add New</button></div>
+
+                        </div>
+                    </form>
+                    
+                </div>
+            <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+  </div>
+
+  
+</section>
+<!-- /.content -->
+
+{% endblock main_content %}
+
+{% block javascript %}
+    <script>
+       
+
+        $(document).ready(function(){
+            $(".add-new").click(function(){
+
+                private_chat = $('<div class="private-chat" data-conversation-between="' + user.data("user") + '">Chat with ' + user.data("user") + '</div>');
+
+                $("#menu_body").append($("<hr>"));
+            })
+          });
+    </script>
+
+{% endblock %}
+

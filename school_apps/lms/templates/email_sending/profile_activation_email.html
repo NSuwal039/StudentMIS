@@ -1,0 +1,32 @@
+{% autoescape off %}
+
+<!doctype html>
+<html lang="en-US">
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title></title>
+    <meta name="description" content="New Account Email Template.">
+    <style type="text/css">
+        a:hover {text-decoration: underline !important;}
+        table, th, td {
+          border: 1px solid black;
+          }
+          table {
+            width: 100%;
+          }
+    </style>
+</head>
+
+<body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
+    <!-- 100% body table -->
+    <h3><bold>Hi {{full_name}}</bold></h3><br>
+    <p>Your Library Account has been Sucessfully Activated.</p><br>
+    <p>Now you can use books from library!</p>
+    <!--/100% body table-->
+</body>
+
+</html>
+
+    
+{% endautoescape %}

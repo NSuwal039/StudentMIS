@@ -1,0 +1,86 @@
+{% extends 'admin_templates/base_admin.html' %}
+
+{% load crispy_forms_tags %}
+{% load static  %}
+
+{% block title %} Rooms {% endblock %}
+{% block main_content %}
+
+<section class="content">
+  <div class="container-fluid">
+
+  {% include "includes/messages.html" %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card" >
+                <div class="card-header" style="background-color: #094089;color:white;" >
+                    <span>Rooms</span>
+                </div>
+
+                <div class="card-body table-responsive">
+            
+                    <table id="dataTable" class="table table-sm  table-striped table-bordered table-hover text-nowrap dataTable no-footer">
+                    <thead>
+                        <tr>
+                        <th></th>
+                        <th>#</th>
+                        <th>Room Name</th>
+                        <th>Building</th>
+                        <th>Floor</th>
+                        <th>Room Type</th>
+                        <th>Members</th>
+                        <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for r in room %}
+                            <tr>
+                                    <td></td>
+                                    <td>{{r.id}}</td>
+                                    <td>{{ r.room_name }}</td>
+                                    <td>{{r.building}}</td>
+                                    <td>{{r.floor}}</td>
+                                    <td>{{r.room_type}}</td>
+                                    <td>{% for r in r.members.all %}{{r}}{% endfor %}</td>
+                                    <td>
+                                        <a href="{% url 'room-detail' r.id %}" class="btn btn-xs btn-info"><strong>View</strong></a>
+                                        <a href="{% url 'room-edit' r.id %}" class="btn btn-xs btn-info"><strong>Edit</strong></a>
+                                        <a href="{% url 'room-delete' r.id %}" class="btn btn-xs btn-info"><strong>Delete</strong></a>
+                                        <a href="#"class="btn btn-xs btn-info"><strong>Print</strong></a>
+                                    </td>
+                            </tr> 
+                        {% endfor %}
+                        {% include 'enquiry/mail_modal.html'%}
+                    </tbody>
+                    </table>
+                </div>
+            <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+  </div>
+
+  
+</section>
+<!-- /.content -->
+
+{% endblock main_content %}
+
+{% block custom_js %}
+<script>
+    $(".modal_display").click(function(e){
+        var id = $(this).data('id')
+        
+        $.ajax({
+            url:" {% url 'enquiry:show_modal' %}",
+            data: {'id':id},
+            success: function(data){
+                $("#modal_body").html(data);
+            }
+        })
+    })
+</script>
+
+{% endblock custom_js %}

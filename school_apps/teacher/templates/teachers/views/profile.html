@@ -1,0 +1,110 @@
+
+
+    <div class="panel-body profile-view-dis">
+        <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="profile-view-tab">
+                        <p><span>Employment Type </span>: {{ teacher.get_employment_type_display }} </p>
+                    </div>
+                </div>
+           
+                <div class="col-sm-6">
+                    <div class="profile-view-tab">
+                        <p><span>Joining Date </span>: {{ teacher.join_date }} </p>
+                    </div>
+                </div>
+               
+                <div class="col-sm-6">
+                    <div class="profile-view-tab">
+                        <p><span>Email </span>: 
+                       {{ teacher.staff_user.email }}</p>
+                    </div>
+                </div>
+                
+                <div class="col-sm-6">
+                    <div class="profile-view-tab">
+                        <p><span>Address </span>: 
+                            {{ teacher.address }}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="profile-view-tab">
+                        <p><span>Username </span>: 
+                            {{ teacher.staff_user.username }}</p>
+                    </div>
+                </div>
+             
+            
+                <div class="col-sm-6">
+                    <div class="profile-view-tab">
+                        <p><span>Languages </span>: </p>
+                    </div>
+                </div>
+         
+                <div class="col-sm-6">
+                    <div class="profile-view-tab">
+                        <p><span>Place of birth </span>: </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="profile-view-tab">
+                        <p><span>Disablility </span>: </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="profile-view-tab">
+                        <p><span>Martyr Lineage </span>: </p>
+                    </div>
+                </div>
+
+
+                
+
+                <div class="col-sm-12">
+                    <div class="profile-view-tab">
+                        <strong>Employment History</strong><p>
+                        <table class="table table-hover table-sm">
+                            <thead class="thead" style="background-color: #094089; color:white">
+                                <tr>
+                                    <th>Institution</th>
+                                    <th>Department</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Example Institution</td>
+                                    <td>Physics</td>
+                                    <td>1998/12/12 - 1999/12/12</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="profile-view-tab">
+                        <p><span>Social Media </span>: </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="profile-view-tab">
+                        <p><span>Last Login </span>: {{ teacher.staff_user.last_login }}</p>
+                    </div>
+                </div>
+       <!--sjsjs-->
+       
+        </div>
+    </div>
+ <style>
+     p{
+         font-weight: 300;
+     }
+    span{
+        font-weight: 400;
+    }
+ </style>
